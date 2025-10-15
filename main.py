@@ -1,5 +1,4 @@
 import classes
 
 
-classes.my_center("JUPITER", 1_000_000, 10_000_000)
-
+classes.sun(10_000_000, 1_000_000_000)
