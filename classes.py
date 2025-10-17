@@ -18,6 +18,8 @@ PLANETS = SpaceData.PLANETS
 # спутники
 SATELLITES = SpaceData.SATELLITES
 
+PLANET_TO_SUN_RADIUS_RATIO = SpaceData.PLANET_TO_SUN_RADIUS_RATIO
+
 
 class Vector:
     """Vector"""
@@ -329,6 +331,60 @@ def my_center(name: Literal['EARTH', 'MARS', 'JUPITER', 'SATURN', 'URANUS', 'NEP
         for obj in SPACE_OBJECTS:
             obj.move()
             draw(screen, center_, obj)
+            draw(screen, center_, obj)
+
+        pygame.display.flip()
+
+
+def run():
+    global FAKE_RADIUS, FAKE_CORDS
+    fake_radius = 400_000
+    fake_cords = 1_000_000_000
+    FAKE_RADIUS = fake_radius * 100
+    FAKE_CORDS = fake_cords
+    SPACE_OBJECTS = []
+    pygame.init()
+    screen = pygame.display.set_mode((screen_width, screen_height))
+    pygame.display.set_caption("Солнечная система")
+    clock = pygame.time.Clock()
+    sun_ = Sun()
+    center_ = None
+    SPACE_OBJECTS.append(sun_)
+    for planet in PLANETS:
+        SPACE_OBJECTS.append(SpaceObject(sun_, **PLANETS[planet]))
+        SPACE_OBJECTS[-1].v_on_start(sun_)
+    for planet in SPACE_OBJECTS:
+        if planet.name in SATELLITES:
+            for st in SATELLITES[planet.name]:
+                SPACE_OBJECTS.append(SpaceObject(sun_, **SATELLITES[planet.name][st]))
+                SPACE_OBJECTS[-1].v_on_start(sun_)
+                SPACE_OBJECTS[-1].v_on_start(planet)
+    center_ = sun_
+
+    while True:
+        clock.tick(60)
+        screen.fill(DARK_BLUE)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == 61:  # +
+                    FAKE_RADIUS /= 1.1
+                    FAKE_CORDS /= 1.1
+                elif event.key == 45: # -
+                    FAKE_RADIUS *= 1.1
+                    FAKE_CORDS *= 1.1
+                elif 47 < event.key < 57:
+                    center_ = SPACE_OBJECTS[event.key - 48]
+                    FAKE_RADIUS = fake_radius * (PLANET_TO_SUN_RADIUS_RATIO[SPACE_OBJECTS[event.key - 48].name] * 100)
+                    FAKE_CORDS = fake_cords * PLANET_TO_SUN_RADIUS_RATIO[SPACE_OBJECTS[event.key - 48].name]
+
+        for obj1 in SPACE_OBJECTS:
+            for obj2 in SPACE_OBJECTS:
+                obj1.f(obj2)
+
+        for obj in SPACE_OBJECTS:
+            obj.move()
             draw(screen, center_, obj)
 
         pygame.display.flip()
