@@ -5,7 +5,7 @@ from dataclasses import dataclass
 class SpaceData:
     G = 6.67e-11
     FPS = 100
-    dt = 365 * 24
+    dt = 365 * 12
     DARK_BLUE = (0, 0, 50)
     YELLOW = (220, 200, 0)
     screen_width = 1200
@@ -175,4 +175,16 @@ class SpaceData:
                 "color": (173, 216, 230)  # голубой
             }
         }
+    }
+    # отношение радиуса планеты к радиусу солнца
+    PLANET_TO_SUN_RADIUS_RATIO = {
+        None: 1,
+        "MERCURY": 2_439.7 / 696_340,
+        "VENUS": 6_051.8 / 696_340,
+        "EARTH": 6_371.0 / 696_340,
+        "MARS": 3_389.5 / 696_340,
+        "JUPITER": 69_911.0 / 696_340,
+        "SATURN": 58_232.0 / 696_340,
+        "URANUS": 25_362.0 / 696_340,
+        "NEPTUNE": 24_622.0 / 696_340
     }
