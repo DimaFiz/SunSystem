@@ -342,7 +342,8 @@ def earth(fake_radius, fake_cords):
 
 
 def my_center(
-        name: Literal["EARTH", "MARS", "JUPITER", "SATURN", "URANUS", "NEPTUNE"],
+        name: Literal[
+            "EARTH", "MARS", "JUPITER", "SATURN", "URANUS", "NEPTUNE"],
         fake_radius,
         fake_cords,
 ):
@@ -706,4 +707,3 @@ def dark_hole(
             draw(screen, center_, obj)
 
         pygame.display.flip()
-
