@@ -68,12 +68,12 @@ class Vector:
 
     def e_v(self) -> Self:  # unit vector
         """Turn to unit vector."""
-        c = self.x**2 + self.y**2
+        c = self.x ** 2 + self.y ** 2
         return self.creator(self.x / c, self.y / c)
 
     def abs(self) -> Self:
         """Abs(vector)."""
-        return (self.x**2 + self.y**2) ** 0.5
+        return (self.x ** 2 + self.y ** 2) ** 0.5
 
     def __str__(self) -> str:
         """Print vector."""
@@ -161,6 +161,9 @@ class Sun:
 
     def get_section(self):
         return (self.sgn(self.x), self.sgn(self.y))
+
+    def light_speed(self):
+        self.v = Speed(3e8, 0)
 
     @staticmethod
     def sgn(x):
@@ -339,9 +342,9 @@ def earth(fake_radius, fake_cords):
 
 
 def my_center(
-    name: Literal["EARTH", "MARS", "JUPITER", "SATURN", "URANUS", "NEPTUNE"],
-    fake_radius,
-    fake_cords,
+        name: Literal["EARTH", "MARS", "JUPITER", "SATURN", "URANUS", "NEPTUNE"],
+        fake_radius,
+        fake_cords,
 ):
     """Define system's center."""
     global FAKE_RADIUS, FAKE_CORDS
@@ -437,14 +440,14 @@ def run():
                 elif 47 < event.key < 57:
                     center_ = SPACE_OBJECTS[event.key - 48]
                     FAKE_RADIUS = fake_radius * (
-                        PLANET_TO_SUN_RADIUS_RATIO[
-                            SPACE_OBJECTS[event.key - 48].name]
-                        * 100
+                            PLANET_TO_SUN_RADIUS_RATIO[
+                                SPACE_OBJECTS[event.key - 48].name]
+                            * 100
                     )
                     FAKE_CORDS = (
-                        fake_cords
-                        * PLANET_TO_SUN_RADIUS_RATIO[
-                            SPACE_OBJECTS[event.key - 48].name]
+                            fake_cords
+                            * PLANET_TO_SUN_RADIUS_RATIO[
+                                SPACE_OBJECTS[event.key - 48].name]
                     )
                     dx = screen_width / 2
                     dy = screen_height / 2
@@ -552,10 +555,10 @@ def trappist_1(fake_radius, fake_cords):
                         ]
                     )
                     FAKE_CORDS = (
-                        fake_cords
-                        * TRAPPIST_1_TO_STAR_RADIUS_RATIO[
-                            SPACE_OBJECTS[event.key - 48].name
-                        ]
+                            fake_cords
+                            * TRAPPIST_1_TO_STAR_RADIUS_RATIO[
+                                SPACE_OBJECTS[event.key - 48].name
+                            ]
                     )
                     dx = screen_width / 2
                     dy = screen_height / 2
@@ -604,10 +607,10 @@ def trappist_1(fake_radius, fake_cords):
 
 
 def dark_hole(
-    fake_radius: int = 10_000_000,
-    fake_cords=10_000_000_000,
-    PLANETS: dict = PLANETS,
-    SATELLITES: dict = SATELLITES,
+        fake_radius: int = 10_000_000,
+        fake_cords=10_000_000_000,
+        PLANETS: dict = PLANETS,
+        SATELLITES: dict = SATELLITES,
 ) -> None:
     """Dark Hole Display"""
 
