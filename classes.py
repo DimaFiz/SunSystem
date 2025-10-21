@@ -615,7 +615,7 @@ def dark_hole(
     """Dark Hole Display"""
 
     global FAKE_RADIUS, FAKE_CORDS, dt, dx, dy
-    dt = 10e-32
+    dt = 10e-30
     FAKE_RADIUS = fake_radius
     FAKE_CORDS = fake_cords
     SPACE_OBJECTS = []
@@ -706,3 +706,4 @@ def dark_hole(
             draw(screen, center_, obj)
 
         pygame.display.flip()
+
